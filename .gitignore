@@ -10,3 +10,5 @@ output/
 .nuxt/
 
 .output/
+
+.DS_Store

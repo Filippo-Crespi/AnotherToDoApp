@@ -4,7 +4,7 @@
 </template>
 
 <script lang="ts" setup>
-
+useRouter().push('/welcome');
 </script>
 
 <style></style>
