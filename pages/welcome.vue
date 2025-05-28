@@ -6,7 +6,7 @@
       <span>Yeah... another simple and effective bla bla to do list and task manager app which helps you manage
         time and sh*t</span>
     </div>
-    <NuxtLink :to="loggedIn.value ? '/dashboard' : '/create'"
+    <NuxtLink :to="loggedIn ? '/dashboard' : '/create'"
       class="bg-[#e34f46] w-full text-center text-white font-semibold py-4 px-8 rounded">
       Get Started
     </NuxtLink>
@@ -14,10 +14,11 @@
 </template>
 
 <script lang="ts" setup>
-const username = useState('username');
-const loggedIn = ref();
-if (!username.value) {
-  loggedIn.value = false
+import { useStorage } from '@vueuse/core';
+const username = useStorage('username', '');
+const loggedIn = ref(false);
+if (username.value) {
+  loggedIn.value = true
 }
 </script>
 

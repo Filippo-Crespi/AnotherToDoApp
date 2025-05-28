@@ -1,18 +1,18 @@
 <template>
-  <div class="flex flex-col gap-8 items-stretch w-full">
+  <div v-if="categories.length > 0" class="flex flex-col gap-8 items-stretch w-full">
     <CategoryBox v-for="category in categories" :category="category" :key="category.id" class="w-full" />
+  </div>
+  <div v-else class="flex flex-col items-center justify-center text-center">
+    <NuxtImg src="/empty.svg" />
+    <span class="text-gray-500 text-lg">No categories found</span>
+    <span class="text-gray-500 text-lg">Create a new category to get started</span>
   </div>
 </template>
 
 <script lang="ts" setup>
-const categories = useState('categories', () => [
-  { id: 1, name: 'Work', icon: 'noto:sun' },
-  { id: 2, name: 'Personal', icon: 'noto:boy-medium-light-skin-tone' },
-  { id: 3, name: 'Shopping', icon: 'noto:shopping-cart' },
-  { id: 4, name: 'Health', icon: 'noto:heart-suit' },
-  { id: 5, name: 'Travel', icon: 'noto:airplane' }
-]);
+import type { Category } from '~/types';
+import { useStorage } from '@vueuse/core';
+const categories = useStorage<Category[]>('categories', []);
 </script>
-
 
 <style></style>

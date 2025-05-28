@@ -1,6 +1,6 @@
 <template>
-  <div class="flex items-center justify-between gap-4 mt-8 self-start">
-    <div class="flex flex-col text-white">
+  <div class="flex items-center justify-center w-full gap-4 mt-8 self-start">
+    <div class="flex flex-col items-center text-white text-center">
       <h1 class="font-black text-xl">Welcome back, {{ username }}</h1>
       <p class="mt-2">Today you have {{ tasks.length }} tasks</p>
     </div>
@@ -9,12 +9,10 @@
 </template>
 
 <script lang="ts" setup>
-const username = useState('username', () => 'John Doe');
-const tasks = useState('tasks', () => [
-  { id: 1, title: 'Complete project report', completed: false },
-  { id: 2, title: 'Attend team meeting', completed: true },
-  { id: 3, title: 'Buy groceries', completed: false }
-]);
+import type { Task } from '~/types';
+import { useStorage } from '@vueuse/core';
+const username = useStorage('username', '');
+const tasks = useStorage('tasks', []);
 </script>
 
 <style></style>

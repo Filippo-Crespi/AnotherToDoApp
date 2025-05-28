@@ -11,15 +11,20 @@
 </template>
 
 <script lang="ts" setup>
+import type { Category, Task } from '~/types'
+import { useStorage } from '@vueuse/core'
+
 const user = ref('')
 const error = ref(false)
 const create = () => {
-  const username = useState('username', () => '')
+  const username = useStorage('username', '')
   if (user.value.trim() === '') {
     error.value = true
     return
   }
   username.value = user.value
+  useStorage('tasks', new Array<Task>())
+  useStorage('categories', new Array<Category>())
   navigateTo('/dashboard')
 }
 </script>
